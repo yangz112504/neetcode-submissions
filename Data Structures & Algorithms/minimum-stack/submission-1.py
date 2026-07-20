@@ -1,0 +1,31 @@
+class MinStack:
+
+    def __init__(self):
+        self.stack = []
+        # purpose of minstack is to track the curr minimum at the time the element was added
+        self.minStack = []
+        
+
+    def push(self, val: int) -> None:
+        self.stack.append(val)
+
+        if len(self.minStack) == 0:
+            self.minStack.append(val)
+        else:
+            # get top element on minStack and compare to new val
+            # if top element < new val, push top val again
+            # else, push new val
+            if self.minStack[-1] < val:
+                self.minStack.append(self.minStack[-1])
+            else:
+                self.minStack.append(val)
+
+    def pop(self) -> None:
+        self.stack.pop()
+        self.minStack.pop()
+
+    def top(self) -> int:
+        return self.stack[-1]
+
+    def getMin(self) -> int:
+        return self.minStack[-1]
